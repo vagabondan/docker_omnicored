@@ -15,6 +15,7 @@ RUN apk update && \
 
 RUN apk add --no-cache git autoconf automake g++ make file && \
     git clone -b develop https://github.com/OmniLayer/omnicore.git $BITCOIN_REPO && \
+    sed -i -- 's/int const STORE_EVERY_N_BLOCK = 10000/int const STORE_EVERY_N_BLOCK = 100/g' $BITCOIN_REPO/src/omnicore/omnicore.h && \
     wget 'http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz' && \
     echo '12edc0df75bf9abd7f82f821795bcee50f42cb2e5f76a6a281b85732798364ef  db-4.8.30.NC.tar.gz' | sha256sum -c && \
     tar -xzf db-4.8.30.NC.tar.gz && \
